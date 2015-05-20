@@ -12,10 +12,7 @@ module.exports = function (options) {
     var Mocha = mochaRequire('mocha');
     var duplex = new Duplex({objectMode: true});
 
-    blanket({
-        pattern : options.instrument,
-        debug: true
-    });
+    blanket(options.blanket);
     duplex._write = function (file, encoding, done) {
         var cover = new Mocha(options);
         delete require.cache[require.resolve(path.resolve(file.path))];
